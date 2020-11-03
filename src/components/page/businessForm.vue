@@ -6,20 +6,20 @@
         </div>
 
         <van-form @submit="onSubmit" label-align="left" input-align="left" label-width="300px">
-            <van-field v-model="name" label="1.企业名称" placeholder="请输入企业名称"
+            <van-field v-model="name" label="1.企业名称 *" placeholder="请输入企业名称"
                 :rules="[{ required: true, message: '请输入企业名称' }]" />
-            <van-field v-model="name" label="2.经办人姓名" placeholder="请输入经办人姓名"
+            <van-field v-model="name" label="2.经办人姓名*" placeholder="请输入经办人姓名"
                 :rules="[{ required: true, message: '请输入经办人姓名' }]" />
-            <van-field v-model="name" label="3.经办人联系方式" placeholder="经办人联系方式"
+            <van-field v-model="name" label="3.经办人联系方式*" placeholder="经办人联系方式"
                 :rules="[{ required: true, message: '请输入经办人联系方式' }]" />
 
-            <van-field name="radio" label="4.公司简介" rows="3" autosize type="textarea" placeholder="请输入公司简介"
+            <van-field name="radio" label="4.公司简介*" rows="3" autosize type="textarea" placeholder="请输入公司简介"
                 :rules="[{ required: true, message: '请输入公司简介' }]">
             </van-field>
-            <van-field name="radio" label="5.招聘岗位" rows="3" autosize type="textarea" placeholder="请输入招聘岗位"
+            <van-field name="radio" label="5.招聘岗位*" rows="3" autosize type="textarea" placeholder="请输入招聘岗位"
                 :rules="[{ required: true, message: '请输入招聘岗位' }]">
             </van-field>
-            <van-field name="radio" label="6.岗位职责" rows="3" autosize type="textarea" placeholder="请输入岗位职责"
+            <van-field name="radio" label="6.岗位职责*" rows="3" autosize type="textarea" placeholder="请输入岗位职责"
                 :rules="[{ required: true, message: '请输入岗位职责' }]">
             </van-field>
             <div style="margin: 16px;">
