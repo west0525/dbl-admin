@@ -16,10 +16,10 @@
             <van-field name="radio" label="4.公司简介" rows="3" autosize type="textarea" placeholder="请输入公司简介"
                 :rules="[{ required: true, message: '请输入公司简介' }]">
             </van-field>
-            <van-field name="radio" label="5.招聘岗位" rows="2" autosize type="textarea" placeholder="请输入招聘岗位"
+            <van-field name="radio" label="5.招聘岗位" rows="3" autosize type="textarea" placeholder="请输入招聘岗位"
                 :rules="[{ required: true, message: '请输入招聘岗位' }]">
             </van-field>
-            <van-field name="radio" label="6.岗位职责" placeholder="请输入岗位职责"
+            <van-field name="radio" label="6.岗位职责" rows="3" autosize type="textarea" placeholder="请输入岗位职责"
                 :rules="[{ required: true, message: '请输入岗位职责' }]">
             </van-field>
             <div style="margin: 16px;">
