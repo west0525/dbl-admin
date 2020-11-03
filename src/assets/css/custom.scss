@@ -1,0 +1,157 @@
+// 界面模块样式
+.page-wrap {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+
+    .page-content {
+        flex: 1;
+        overflow: hidden;
+    }
+
+    .bottom-btn {
+        padding: 5px 0;
+        text-align: center;
+        margin-top: 12px;
+        background: #fff;
+
+        /deep/ .el-button {
+            min-width: 98px !important;
+        }
+    }
+
+    .p-0 {
+        padding: 0 !important;
+    }
+
+    .p-b-20 {
+        padding-bottom: 20px !important;
+    }
+
+    .p-20 {
+        padding: 20px !important;
+    }
+
+    .p-x-0 {
+        padding: 20px 0 !important;
+    }
+
+    .p-t-btn {
+        padding: 0 0px 20px !important;
+    }
+
+    .p-t-20 {
+        padding-top: 20px !important;
+    }
+
+    .page-column {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        background: #fff;
+        padding: 0 30px;
+        padding-bottom: 0;
+
+        .page-form {
+            flex: 1;
+            overflow: auto;
+            padding-top: 20px;
+        }
+
+        .table-box {
+            flex: 1;
+            border-radius: 5px;
+            overflow: hidden;
+            .el-table__header tr,
+            .el-table__header th {
+                padding: 0;
+                height: 40px;
+                background: #F3FBFF;
+            }
+
+            .el-table__body tr,
+            .el-table__body td {
+                padding: 0;
+                height: 54px;
+            }
+
+            /deep/ .el-button {
+                min-width: 0;
+            }
+
+            .el-table-column--selection .cell {
+                padding-left: 14px;
+            }
+
+        }
+
+        .search-box {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            position: relative;
+            
+        }
+
+        .pagination {
+            margin-top: 10px;
+        }
+    }
+
+    .page-row {
+        height: 100%;
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+
+        .box-left {
+            width: 300px;
+            margin-right: 12px;
+            display: flex;
+            flex-direction: column;
+            flex: none;
+            background: #fff;
+            padding: 20px;
+            padding-top: 0;
+
+            .search-input {
+                margin-top: 10px;
+                margin-bottom: 20px;
+            }
+
+        }
+
+        .box-right {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            width: 0;
+            background: #fff;
+            padding: 0 20px;
+
+            .flex-tabs>.el-tabs__content {
+                >.el-tab-pane {
+                    padding-bottom: 0;
+                }
+            }
+
+            .table-box {
+                flex: 1;
+                border-radius: 5px;
+                overflow: hidden;
+
+                /deep/ .el-button {
+                    min-width: 0;
+                }
+
+
+            }
+        }
+    }
+}
+.tips{
+    color: #999;
+    font-size: 14px;
+}

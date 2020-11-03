@@ -1,0 +1,173 @@
+<template>
+    <div class="page-wrap">
+        <div class="crumbs">
+            <el-breadcrumb separator="/">
+                <el-breadcrumb-item>
+                    <i class="el-icon-lx-cascades"></i> 商务合作
+                </el-breadcrumb-item>
+            </el-breadcrumb>
+        </div>
+        <div class="page-content ">
+            <div class="page-column">
+                <div class="search-box">
+                    <div>
+                        <el-input v-model="query.nameLike" placeholder="输入关键词搜索" class="handle-input mr10"></el-input>
+                        <el-button type="primary" icon="el-icon-search" @click="clickQuery">搜索</el-button>
+                    </div>
+                    <div>
+                        <el-button type="primary" icon="el-icon-download" @click="exportFun">导出
+                        </el-button>
+                    </div>
+                </div>
+                <div class="table-box">
+                    <el-table :data="tableData.columnData" border height="100%">
+                        <el-table-column type="index" width="50" label="序号"> </el-table-column>
+                        <el-table-column prop="gsmc" label="公司名称" min-width="160" align="left"></el-table-column>
+                        <el-table-column prop="gsmc" label="公司简介" min-width="160" align="left"></el-table-column>
+                        <el-table-column prop="jbrxm" label="经办人姓名" min-width="100" align="center"></el-table-column>
+                        <el-table-column prop="jbrlxfs" label="经办人联系方式" min-width="120" align="center">
+                        </el-table-column>
+                        <el-table-column prop="zpgw" label="招聘岗位" min-width="120" align="center"></el-table-column>
+                        <el-table-column prop="gzdz" label="工作地址" min-width="160" align="left"></el-table-column>
+                        <el-table-column prop="gwzz" label="岗位职责" min-width="160" align="left"></el-table-column>
+                        <el-table-column prop="rzyq" label="任职要求" min-width="160" align="left"></el-table-column>
+                        <el-table-column prop="xzfl" label="薪资福利" min-width="120" align="center"></el-table-column>
+                        <el-table-column prop="lxfs" label="联系方式" min-width="120" align="center"></el-table-column>
+                        <el-table-column prop="cjss" label="创建时间" min-width="160" align="center"></el-table-column>
+                    </el-table>
+                </div>
+
+                <div class="pagination">
+                    <el-pagination :page-sizes="[5, 10, 15, 30, 50]" :page-size="tableData.pageSize"
+                        layout="sizes,total,prev,pager,next" :total="tableData.total"
+                        :current-page="tableData.currentPage" @size-change="handleSizeChange"
+                        @current-change="handleCurrentChange">
+                    </el-pagination>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+<script>
+    import {
+        bussinessList
+    } from '../../api/index';
+    import {
+        http_builder_url
+    } from '@/utils/Tools';
+    export default {
+        name: '',
+        data() {
+            return {
+                query: {
+                    nameLike: '',
+                },
+                tableData: {
+                    // 表格绑定对象
+                    orders: "",
+                    columns: "",
+                    pageSize: 15,
+                    currentPage: 1,
+                    total: 0,
+                    headerData: [],
+                    columnData: [{}, {}, {}, {}, ]
+                },
+            };
+        },
+        methods: {
+            exportFun() {
+                let params = {
+                    orders: this.tableData.orders, // 排序顺序
+                    columns: this.tableData.columns, // 排序字段
+                    nameLike: this.query.nameLike
+                }
+                let newpa = http_builder_url('', params);
+                window.location.href = "/api/api-work/inspect/sDevice/exportData" + newpa + "&token=" + this.$store
+                    .state
+                    .token
+                    .token + '&exports='
+            },
+            clickQuery() {
+                // 搜索按钮
+                this.tableData.currentPage = 1
+                this.tableDataInit()
+            },
+            tableDataInit() {
+                // 列表数据请求
+                let params = {
+                    rowSize: this.tableData.pageSize,
+                    startRow: this.tableData.currentPage,
+                    orders: this.tableData.orders,
+                    columns: this.tableData.columns,
+                    nameLike: this.query.nameLike
+                }
+                this.loading = true
+                bussinessList(params)
+                    .then(res => {
+                        if (res.data.code == 1000) {
+                            let data = res.data.data
+                            if (Array.isArray(data.data)) {
+                                this.tableData.columnData = [...data.data]
+                                this.tableData.total = data.total
+                            } else {
+                                this.tableData.columnData = []
+                                this.tableData.total = 0
+                            }
+                        }
+                        this.loading = false
+                    })
+                    .catch(error => {
+                        this.tableData.columnData = []
+                        this.loading = false
+                    })
+            },
+            handleCurrentChange(val) {
+                // 分页方法 （点击第val页触发）
+                this.tableData.currentPage = val
+                this.tableDataInit()
+            },
+            handleSizeChange(val) {
+                // 分页方法 （改变每页val条触发）
+                this.tableData.pageSize = val
+                this.tableDataInit()
+            }
+
+        }
+    };
+</script>
+
+<style scoped>
+    .handle-box {
+        margin-bottom: 20px;
+    }
+
+    .handle-select {
+        width: 120px;
+    }
+
+    .handle-input {
+        width: 300px;
+        display: inline-block;
+    }
+
+    .table {
+        width: 100%;
+        font-size: 14px;
+    }
+
+    .red {
+        color: #ff0000;
+    }
+
+    .mr10 {
+        margin-right: 10px;
+    }
+
+    .table-td-thumb {
+        display: block;
+        margin: auto;
+        width: 40px;
+        height: 40px;
+    }
+</style>
