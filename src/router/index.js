@@ -53,6 +53,20 @@ export default new Router({
             }
         },
         {
+            path: '/resumeForm',
+            component: () => import( /* webpackChunkName: "login" */ '../components/page/resumeForm.vue'),
+            meta: {
+                title: '求职登记表'
+            }
+        },
+        {
+            path: '/businessForm',
+            component: () => import( /* webpackChunkName: "login" */ '../components/page/businessForm.vue'),
+            meta: {
+                title: '招聘登记表'
+            }
+        },
+        {
             path: '*',
             redirect: '/404'
         }

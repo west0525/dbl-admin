@@ -10,6 +10,10 @@ import './assets/css/custom.scss';
 import './assets/css/icon.css';
 import './components/common/directives';
 import 'babel-polyfill';
+import Vant from 'vant';
+import 'vant/lib/index.css';
+
+Vue.use(Vant);
 
 Vue.config.productionTip = false;
 Vue.use(VueI18n);
