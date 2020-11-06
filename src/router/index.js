@@ -67,6 +67,13 @@ export default new Router({
             }
         },
         {
+            path: '/wxCube',
+            component: () => import( /* webpackChunkName: "login" */ '../components/page/wxCube.vue'),
+            meta: {
+                title: '微信矩阵'
+            }
+        },
+        {
             path: '*',
             redirect: '/404'
         }
