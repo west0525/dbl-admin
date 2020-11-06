@@ -80,6 +80,7 @@
 </script>
 
 <style scoped>
+
     .sidebar {
         display: block;
         position: absolute;
