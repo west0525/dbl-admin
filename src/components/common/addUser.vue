@@ -7,17 +7,16 @@
             </el-form-item>
             <el-form-item label="性别：" prop="sex">
                 <el-radio-group v-model="form.sex">
-                    <el-radio :label="1">男</el-radio>
-                    <el-radio :label="2">女</el-radio>
-                    <el-radio :label="3">保密</el-radio>
+                    <el-radio label="男">男</el-radio>
+                    <el-radio label="女">女</el-radio>
                 </el-radio-group>
             </el-form-item>
-            <el-form-item label="手机号：" prop="mobile">
-                <el-input v-model="form.mobile" placeholder="请输入手机号"></el-input>
+            <el-form-item label="手机号：" prop="phone">
+                <el-input v-model="form.phone" placeholder="请输入手机号"></el-input>
                 <p class="tips">*手机号将作为系统登录账号使用</p>
             </el-form-item>
-            <el-form-item label="所属部门：" prop="dept">
-                <el-input v-model="form.dept" placeholder="请输入部门名称"></el-input>
+            <el-form-item label="所属部门：" prop="deptName">
+                <el-input v-model="form.deptName" placeholder="请输入部门名称"></el-input>
             </el-form-item>
             <el-form-item label="登录密码：" prop="loginPwd">
                 <el-input v-model="form.loginPwd" auto-complete="new-password" show-password placeholder="请输入密码">
@@ -82,8 +81,8 @@
                     id: '',
                     name: '',
                     sex: 1,
-                    dept: '',
-                    mobile: '',
+                    deptName: '',
+                    phone: '',
                     loginPwd: '',
                     loginPwd2: ''
                 },
@@ -114,7 +113,7 @@
                             trigger: "blur"
                         }
                     ],
-                    mobile: [{
+                    phone: [{
                             required: true,
                             message: "手机号必填",
                             trigger: "blur"
@@ -143,7 +142,7 @@
                             trigger: 'blur'
                         },
                     ],
-                    dept: [{
+                    deptName: [{
                             required: true,
                             message: "部门名称必填",
                             trigger: "blur"
@@ -169,8 +168,8 @@
                     this.form.id = data.id
                     this.form.name = data.name
                     this.form.sex = data.sex
-                    this.form.dept = data.dept
-                    this.form.mobile = data.mobile
+                    this.form.deptName = data.deptName
+                    this.form.phone = data.phone
                     this.form.loginPwd = data.loginPwd
                     this.form.id = data.id
                 } else {
@@ -186,8 +185,8 @@
                             id: this.form.id,
                             name: this.form.name,
                             sex: this.form.sex,
-                            dept: this.form.dept,
-                            mobile: this.form.mobile,
+                            deptName: this.form.deptName,
+                            phone: this.form.phone,
                             loginPwd: this.form.loginPwd,
                         }
                         this.loading = true;

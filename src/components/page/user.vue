@@ -11,7 +11,7 @@
             <div class="page-column">
                 <div class="search-box">
                     <div>
-                        <el-input v-model="query.name" placeholder="输入关键词搜索" class="handle-input mr10"></el-input>
+                        <el-input v-model="query.keywords" placeholder="输入关键词搜索" class="handle-input mr10"></el-input>
                         <el-button type="primary" icon="el-icon-search" @click="clickQuery">搜索</el-button>
                     </div>
                     <div>
@@ -24,13 +24,13 @@
                 <div class="table-box">
                     <el-table :data="tableData.columnData" border height="100%">
                         <el-table-column type="index" width="50" label="序号"> </el-table-column>
-                        <el-table-column prop="xm" label="姓名" min-width="160" align="left"></el-table-column>
-                        <el-table-column prop="xb" label="性别" min-width="160" align="left"></el-table-column>
-                        <el-table-column prop="sjh" label="手机号" min-width="120" align="center">
+                        <el-table-column prop="name" label="姓名" min-width="160" align="left"></el-table-column>
+                        <el-table-column prop="sex" label="性别" min-width="160" align="left"></el-table-column>
+                        <el-table-column prop="phone" label="手机号" min-width="120" align="center">
                         </el-table-column>
-                        <el-table-column prop="jzdz" label="所属部门" min-width="120" align="center">
+                        <el-table-column prop="deptName" label="所属部门" min-width="120" align="center">
                         </el-table-column>
-                        <el-table-column prop="cjss" label="创建时间" min-width="160" align="center"></el-table-column>
+                        <el-table-column prop="crtDt" label="创建时间" min-width="160" align="center"></el-table-column>
                         <el-table-column label="操作" width="180" align="center" fixed="right">
                             <template slot-scope="scope">
                                 <el-button type="text" icon="el-icon-edit" @click="editUser(scope.row)">
@@ -69,7 +69,7 @@
         data() {
             return {
                 query: {
-                    name: '',
+                    keywords: '',
                     pageIndex: 1,
                     pageSize: 10
                 },
@@ -81,7 +81,7 @@
                     currentPage: 1,
                     total: 0,
                     headerData: [],
-                    columnData: [{}, {}, {}, {}]
+                    columnData: []
                 },
             };
         },
@@ -99,7 +99,7 @@
                 let params = {
                     orders: this.tableData.orders, // 排序顺序
                     columns: this.tableData.columns, // 排序字段
-                    nameLike: this.query.nameLike
+                    keywords: this.query.keywords
                 }
                 let newpa = http_builder_url('', params);
                 window.location.href = "/exportData" + newpa + "&token=" + this.$store
@@ -139,7 +139,7 @@
                     startRow: this.tableData.currentPage,
                     orders: this.tableData.orders,
                     columns: this.tableData.columns,
-                    nameLike: this.query.nameLike
+                    keywords: this.query.keywords
                 }
                 this.loading = true
                 userList(params)
