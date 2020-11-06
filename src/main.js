@@ -27,7 +27,7 @@ const i18n = new VueI18n({
 
 //使用钩子函数对路由进行权限跳转
 router.beforeEach((to, from, next) => {
-    document.title = `${to.meta.title} | 多宝力后台管理系统`;
+    document.title = `${to.meta.title}`;
     // const role = localStorage.getItem('ms_username')||'admin';
     // if (!role && to.path !== '/login') {
     //     next('/login');

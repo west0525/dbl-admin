@@ -11,7 +11,7 @@
             <div class="page-column">
                 <div class="search-box">
                     <div>
-                        <el-input v-model="query.nameLike" placeholder="输入关键词搜索" class="handle-input mr10"></el-input>
+                        <el-input v-model="query.keyWords" clearable placeholder="可输入公司名称，经办人姓名，工作地址查询" class="handle-input mr10"></el-input>
                         <el-button type="primary" icon="el-icon-search" @click="clickQuery">搜索</el-button>
                     </div>
                     <div>
@@ -22,18 +22,18 @@
                 <div class="table-box">
                     <el-table :data="tableData.columnData" border height="100%">
                         <el-table-column type="index" width="50" label="序号"> </el-table-column>
-                        <el-table-column prop="gsmc" label="公司名称" min-width="160" align="left"></el-table-column>
-                        <el-table-column prop="gsmc" label="公司简介" min-width="160" align="left"></el-table-column>
-                        <el-table-column prop="jbrxm" label="经办人姓名" min-width="100" align="center"></el-table-column>
-                        <el-table-column prop="jbrlxfs" label="经办人联系方式" min-width="120" align="center">
+                        <el-table-column prop="compName" label="公司名称" min-width="160" align="left"></el-table-column>
+                        <el-table-column prop="compDescr" label="公司简介" min-width="160" align="left"></el-table-column>
+                        <el-table-column prop="workName" label="经办人姓名" min-width="100" align="center"></el-table-column>
+                        <el-table-column prop="workPhone" label="经办人联系方式" min-width="120" align="center">
                         </el-table-column>
-                        <el-table-column prop="zpgw" label="招聘岗位" min-width="120" align="center"></el-table-column>
-                        <el-table-column prop="gzdz" label="工作地址" min-width="160" align="left"></el-table-column>
-                        <el-table-column prop="gwzz" label="岗位职责" min-width="160" align="left"></el-table-column>
-                        <el-table-column prop="rzyq" label="任职要求" min-width="160" align="left"></el-table-column>
-                        <el-table-column prop="xzfl" label="薪资福利" min-width="120" align="center"></el-table-column>
-                        <el-table-column prop="lxfs" label="联系方式" min-width="120" align="center"></el-table-column>
-                        <el-table-column prop="cjss" label="创建时间" min-width="160" align="center"></el-table-column>
+                        <el-table-column prop="job" label="招聘岗位" min-width="120" align="center"></el-table-column>
+                        <el-table-column prop="workDuty" label="岗位职责" min-width="160" align="left"></el-table-column>
+                        <el-table-column prop="workRequest" label="任职要求" min-width="160" align="left"></el-table-column>
+                        <el-table-column prop="salary" label="薪资福利" min-width="120" align="center"></el-table-column>
+                        <el-table-column prop="contactPhone" label="联系方式" min-width="120" align="center"></el-table-column>
+                        <el-table-column prop="workAddress" label="工作地址" min-width="160" align="left"></el-table-column>
+                        <el-table-column prop="crtDt" label="创建时间" min-width="160" align="center"></el-table-column>
                     </el-table>
                 </div>
 
@@ -61,7 +61,7 @@
         data() {
             return {
                 query: {
-                    nameLike: '',
+                    keyWords: '',
                 },
                 tableData: {
                     // 表格绑定对象
@@ -80,7 +80,7 @@
                 let params = {
                     orders: this.tableData.orders, // 排序顺序
                     columns: this.tableData.columns, // 排序字段
-                    nameLike: this.query.nameLike
+                    keyWords: this.query.keyWords
                 }
                 let newpa = http_builder_url('', params);
                 window.location.href = "/api/api-work/inspect/sDevice/exportData" + newpa + "&token=" + this.$store
@@ -100,7 +100,7 @@
                     startRow: this.tableData.currentPage,
                     orders: this.tableData.orders,
                     columns: this.tableData.columns,
-                    nameLike: this.query.nameLike
+                    keyWords: this.query.keyWords
                 }
                 this.loading = true
                 bussinessList(params)

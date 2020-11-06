@@ -11,7 +11,7 @@
             <div class="page-column">
                 <div class="search-box">
                     <div>
-                        <el-input v-model="query.name" placeholder="输入关键词搜索" class="handle-input mr10"></el-input>
+                        <el-input v-model="query.keyWords" placeholder="输入关键词搜索" class="handle-input mr10"></el-input>
                         <el-button type="primary" icon="el-icon-search" @click="clickQuery">搜索</el-button>
                     </div>
                     <div>
@@ -22,25 +22,26 @@
                 <div class="table-box">
                     <el-table :data="tableData.columnData" border height="100%">
                         <el-table-column type="index" width="50" label="序号"> </el-table-column>
-                        <el-table-column prop="xm" label="姓名" min-width="160" align="left"></el-table-column>
-                        <el-table-column prop="qzgw" label="求职岗位" min-width="120" align="center"></el-table-column>
-                        <el-table-column prop="xb" label="性别" min-width="160" align="center"></el-table-column>
-                        <el-table-column prop="csny" label="出生年月" min-width="160" align="center"></el-table-column>
-                        <el-table-column prop="sfzh" label="身份证号" min-width="160" align="center"></el-table-column>
-                        <el-table-column prop="xl" label="学历" min-width="120" align="center"></el-table-column>
-                        <el-table-column prop="byyx" label="毕业院校" min-width="120" align="left"></el-table-column>
-                        <el-table-column prop="sxzy" label="所学专业" min-width="120" align="left"></el-table-column>
-                        <el-table-column prop="sfyjbys" label="是否应届毕业生" min-width="180" align="center">
+                        <el-table-column prop="job" label="求职岗位" min-width="120" align="center"></el-table-column>
+                        <el-table-column prop="name" label="姓名" min-width="160" align="left"></el-table-column>
+                        <el-table-column prop="sex" label="性别" min-width="160" align="center"></el-table-column>
+                        <el-table-column prop="birth" label="出生年月" min-width="160" align="center"></el-table-column>
+                        <el-table-column prop="idNumber" label="身份证号" min-width="160" align="center"></el-table-column>
+                        <el-table-column prop="education" label="学历" min-width="120" align="center"></el-table-column>
+                        <el-table-column prop="school" label="毕业院校" min-width="120" align="left"></el-table-column>
+                        <el-table-column prop="major" label="所学专业" min-width="120" align="left"></el-table-column>
+                        <el-table-column prop="isYear" label="是否应届毕业生" min-width="180" align="center">
                         </el-table-column>
-                        <el-table-column prop="hjxz" label="户籍性质" min-width="100" align="center"></el-table-column>
-                        <el-table-column prop="gzjl" label="工作经历" min-width="200" show-overflow-tooltip align="left">
+                        <el-table-column prop="placeType" label="户籍性质" min-width="100" align="center"></el-table-column>
+                        <el-table-column prop="experience" label="工作经历" min-width="200" show-overflow-tooltip
+                            align="left">
                         </el-table-column>
-                        <el-table-column prop="gzjn" label="工作技能" min-width="160" align="left"></el-table-column>
-                        <el-table-column prop="lxfs" label="联系方式" min-width="120" align="center">
+                        <el-table-column prop="skill" label="工作技能" min-width="160" align="left"></el-table-column>
+                        <el-table-column prop="phone" label="联系方式" min-width="120" align="center">
                         </el-table-column>
-                        <el-table-column prop="jzdz" label="居住地址" min-width="160" align="left">
+                        <el-table-column prop="address" label="居住地址" min-width="160" align="left">
                         </el-table-column>
-                        <el-table-column prop="cjss" label="创建时间" min-width="160" align="center"></el-table-column>
+                        <el-table-column prop="crtDt" label="创建时间" min-width="160" align="center"></el-table-column>
                     </el-table>
                 </div>
 
@@ -68,7 +69,7 @@
         data() {
             return {
                 query: {
-                    nameLike: '',
+                    keyWords: '',
                 },
                 tableData: {
                     // 表格绑定对象
@@ -78,7 +79,7 @@
                     currentPage: 1,
                     total: 0,
                     headerData: [],
-                    columnData: [{}, {}, {}, {}, ]
+                    columnData: []
                 },
             };
         },
@@ -87,7 +88,7 @@
                 let params = {
                     orders: this.tableData.orders, // 排序顺序
                     columns: this.tableData.columns, // 排序字段
-                    nameLike: this.query.nameLike
+                    keyWords: this.query.keyWords
                 }
                 let newpa = http_builder_url('', params);
                 window.location.href = "/api/api-work/inspect/sDevice/exportData" + newpa + "&token=" + this.$store
@@ -107,7 +108,7 @@
                     startRow: this.tableData.currentPage,
                     orders: this.tableData.orders,
                     columns: this.tableData.columns,
-                    nameLike: this.query.nameLike
+                    keyWords: this.query.keyWords
                 }
                 this.loading = true
                 resumeList(params)
