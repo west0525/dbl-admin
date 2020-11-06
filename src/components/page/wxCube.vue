@@ -15,13 +15,14 @@
     export default {
         data() {
             return {
+                
                 cubeData: [{
                     logo: require('../../assets/img/zgzfw.jpg'),
                     url: 'https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=MzA4MDA0MzcwMA==#wechat_redirect',
                     name: '中国政府网'
                 }, {
                     logo: require('../../assets/img/rlzy.jpg'),
-                    url: 'https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=MjM5MTU4MzM4MQ==#wechat_redirect',
+                    url: 'https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=MzI2NTQzNjc2MA==#wechat_redirect',
                     name: '中国人社'
                 }, {
                     logo: require('../../assets/img/czb.jpg'),
@@ -49,15 +50,15 @@
                     name: '顺义人社'
                 }, {
                     logo: require('../../assets/img/sywc.jpg'),
-                    url: 'https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=MzUzMDc2MTY2Ng==#wechat_redirect',
+                    url: 'https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=MzAwNDgxMzY4Mw==#wechat_redirect',
                     name: '顺义区信息中心'
                 }, {
                     logo: require('../../assets/img/sf.jpg'),
-                    url: 'https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=MzUzMDc2MTY2Ng==#wechat_redirect',
+                    url: 'https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=MjM5Njc2NDEwMA==#wechat_redirect',
                     name: '顺丰速运'
                 }, {
                     logo: require('../../assets/img/301.jpg'),
-                    url: 'https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=MzUzMDc2MTY2Ng==#wechat_redirect',
+                    url: 'https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=MzIyNzk3Mjg3NA==#wechat_redirect',
                     name: '301医院'
                 }, {
                     logo: require('../../assets/img/krjl.jpg'),
