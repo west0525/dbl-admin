@@ -15,7 +15,6 @@
     export default {
         data() {
             return {
-                
                 cubeData: [{
                     logo: require('../../assets/img/zgzfw.jpg'),
                     url: 'https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=MzA4MDA0MzcwMA==#wechat_redirect',
