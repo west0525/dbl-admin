@@ -22,7 +22,7 @@
         </template>
       </van-field>
       <van-field v-model="form.idNumber" required name="idNumber" label="身份证号" placeholder="请输入身份证号"
-        :rules="[{ required: true, message: '请输入身份证号' },{ validator: validatorId, message: '手机号格式错误' }]">
+        :rules="[{ required: true, message: '请输入身份证号' },{ validator: validatorId, message: '身份证号格式错误' }]">
       </van-field>
       <van-field required name="education" label="学历" class="sradio" :rules="[{ required: true, message: '请选择学历' }]">
         <template #input>
@@ -185,26 +185,29 @@
     height: 100%;
   }
 
-  .formcontent /deep/ .van-cell {
+  .formcontent .van-cell {
+    -webkit-box-orient: vertical;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
     flex-direction: column;
   }
 
-  .formcontent /deep/ .van-field__control::placeholder {
+  .formcontent .van-field__control::placeholder {
     color: #ccc;
   }
 
-  .formcontent /deep/ .van-field__label {
+  .formcontent .van-field__label {
     font-size: 18px;
     font-weight: bold;
     padding-bottom: 10px;
     color: #333;
   }
 
-  .sradio /deep/ .van-radio {
+  .sradio .van-radio {
     margin-bottom: 10px;
   }
 
-  .scheck /deep/ .van-checkbox {
+  .scheck .van-checkbox {
     margin-bottom: 10px;
   }
 </style>

@@ -95,22 +95,25 @@
         height: 100%;
     }
 
-    .formcontent /deep/ .van-cell {
+    .formcontent .van-cell {
+        -webkit-box-orient: vertical;
+        -webkit-flex-direction: column;
+        -ms-flex-direction: column;
         flex-direction: column;
     }
 
-    .formcontent /deep/ .van-field__control::placeholder {
+    .formcontent .van-field__control::placeholder {
         color: #ccc;
     }
 
-    .formcontent /deep/ .van-field__label {
+    .formcontent .van-field__label {
         font-size: 18px;
         font-weight: bold;
         padding-bottom: 10px;
         color: #333;
     }
 
-    .sradio /deep/ .van-radio {
+    .sradio .van-radio {
         margin-bottom: 10px;
     }
 </style>
