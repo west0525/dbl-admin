@@ -39,5 +39,6 @@
         left: 50%;
         transform: translate(-50%, -50%);
         border-radius: 20px;
+        z-index: 999;
     }
 </style>

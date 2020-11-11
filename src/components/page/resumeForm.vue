@@ -2,7 +2,7 @@
   <div class="formcontent">
     <div>
       <van-image height="206" :src="logo" />
-      <p class="tips descr"> 北京多宝力劳务派遣公司，为求职者和招聘方搭建就业供需平台。请认真填写应聘求职信息，保证所填信息真实有效，电话号码正确</p>
+      <p class="tips descr"> 北京多宝力劳务派遣有限公司，为求职者和招聘方搭建就业供需平台。请认真填写应聘求职信息，保证所填信息真实有效，电话号码正确</p>
     </div>
 
     <van-form @submit="onSubmit" label-align="left" input-align="left" label-width="300px">
@@ -229,9 +229,12 @@
             phone: this.form.phone,
             experience: this.form.experience,
             skill: this.form.skill,
-            job: this.form.job.join(),
+            job: '',
             other: this.form.other,
           }
+          let idx = this.form.job.indexOf('其他')
+          this.form.job.splice(idx,1,this.form.other)
+          params.job = this.form.job.join()
           saveresume(params).then(res => {
             if (res.data.code == 1000) {
               Dialog.alert({

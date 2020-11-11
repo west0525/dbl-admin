@@ -3,7 +3,9 @@ import App from './App.vue';
 import router from './router';
 import ElementUI from 'element-ui';
 import VueI18n from 'vue-i18n';
-import { messages } from './components/common/i18n';
+import {
+    messages
+} from './components/common/i18n';
 import filters from "@/utils/filters";
 import 'element-ui/lib/theme-chalk/index.css'; // 默认主题
 // import './assets/css/theme-green/index.css'; // 浅绿色主题
@@ -32,10 +34,10 @@ const i18n = new VueI18n({
 router.beforeEach((to, from, next) => {
     document.title = `${to.meta.title}`;
     const username = sessionStorage.getItem('username');
-    
-    if (!username && to.path !== '/login') {
+
+    if (!username && to.path !== '/login' && to.path !== '/businessForm' && to.path !== '/resumeForm' && to.path !== '/wxCube') {
         next('/login');
-    } 
+    }
     next();
 });
 

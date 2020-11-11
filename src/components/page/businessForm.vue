@@ -2,7 +2,7 @@
     <div class="formcontent">
         <div>
             <van-image height="206" :src="logo" />
-            <p class="tips descr"> 北京多宝力劳务派遣公司，为求职者和招聘方搭建就业供需平台。请企业HR按照要求将招聘公告的各项内容逐一填到置顶栏</p>
+            <p class="tips descr"> 北京多宝力劳务派遣有限公司，为求职者和招聘方搭建就业供需平台。请企业HR按照要求将招聘公告的各项内容逐一填到置顶栏</p>
         </div>
         <van-form @submit="onSubmit" label-align="left" input-align="left" label-width="300px">
             <van-field v-model="form.compName" name="compName" label="公司名称" required placeholder="请输入公司名称"
