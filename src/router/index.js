@@ -73,7 +73,7 @@ export default new Router({
                 title: '微信矩阵'
             }
         },
-      
+
         {
             path: '*',
             redirect: '/404'

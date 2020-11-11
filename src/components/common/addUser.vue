@@ -162,7 +162,6 @@
         },
         methods: {
             showLayout(data) {
-                console.log(data);
                 if (data) {
                     this.form.id = data.id
                     this.title = "修改角色";

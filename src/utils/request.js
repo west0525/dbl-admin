@@ -36,7 +36,6 @@ service.interceptors.request.use(config => {
 
 //响应拦截器
 service.interceptors.response.use(response => {
-    console.log(response)
     /** 以下可根据返回的code值来做用户权限操作*/
     if (response.data.code == 1000) {
 

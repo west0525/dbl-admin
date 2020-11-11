@@ -151,7 +151,6 @@
                 this.loading = true
                 userList(params)
                     .then(res => {
-                        console.log(res, '123')
                         if (res.code == 1000) {
 
                             let data = res.data
