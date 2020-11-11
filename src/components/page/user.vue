@@ -17,7 +17,7 @@
                     <div>
                         <el-button type="primary" icon="el-icon-plus" @click="newUser">新增用户
                         </el-button>
-                        <el-button type="primary" icon="el-icon-download" @click="exportFun">导出
+                        <el-button type="primary" icon="el-icon-download" @click="exportFun" :disabled="!tableData.columnData.length">导出
                         </el-button>
                     </div>
                 </div>

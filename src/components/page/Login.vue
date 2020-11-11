@@ -62,7 +62,12 @@
                                 this.$message.success('登录成功');
                                 sessionStorage.setItem('username', this.param.username);
                                 sessionStorage.setItem('sex', res.data.data.sex);
+                                sessionStorage.setItem('name', res.data.data.name);
                                 this.$router.push('/home');
+                            } else {
+                                sessionStorage.removeItem('username');
+                                sessionStorage.removeItem('sex');
+                                sessionStorage.removeItem('name');
                             }
 
                         })
