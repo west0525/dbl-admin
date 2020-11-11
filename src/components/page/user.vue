@@ -11,7 +11,7 @@
             <div class="page-column">
                 <div class="search-box">
                     <div>
-                        <el-input v-model="query.keywords" placeholder="输入关键词搜索" class="handle-input mr10"></el-input>
+                        <el-input v-model="query.keywords" placeholder="输入姓名、电话、部门查询" class="handle-input mr10"></el-input>
                         <el-button type="primary" icon="el-icon-search" @click="clickQuery">搜索</el-button>
                     </div>
                     <div>
@@ -107,10 +107,7 @@
                     keywords: this.query.keywords
                 }
                 let newpa = http_builder_url('', params);
-                window.location.href = "/exportData" + newpa + "&token=" + this.$store
-                    .state
-                    .token
-                    .token + '&exports='
+                window.location.href = "/api/inspect/user/exportData" + newpa
             },
             clickQuery() {
                 // 搜索按钮

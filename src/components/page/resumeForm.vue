@@ -124,6 +124,7 @@
         logo: require('../../assets/img/loginbg.png'),
         form: {
           id: '',
+          name: '',
           sex: '男',
           birth: '',
           idNumber: '',
@@ -215,6 +216,7 @@
         }).then(() => {
           let params = {
             id: '',
+            name: this.form.name,
             sex: this.form.sex,
             birth: this.form.birth,
             idNumber: this.form.idNumber,

@@ -11,7 +11,7 @@
             <div class="page-column">
                 <div class="search-box">
                     <div>
-                        <el-input v-model="query.keyWords" placeholder="输入关键词搜索" class="handle-input mr10"></el-input>
+                        <el-input v-model="query.keyWords" placeholder="输入姓名、岗位、技能、工作技能查询" class="handle-input mr10"></el-input>
                         <el-button type="primary" icon="el-icon-search" @click="clickQuery">搜索</el-button>
                     </div>
                     <div>
@@ -22,7 +22,7 @@
                 <div class="table-box">
                     <el-table :data="tableData.columnData" border height="100%">
                         <el-table-column type="index" width="50" label="序号"> </el-table-column>
-                        <el-table-column prop="job" label="求职岗位" min-width="120" align="center"></el-table-column>
+                        <el-table-column prop="job" label="求职岗位" min-width="300" align="center"></el-table-column>
                         <el-table-column prop="name" label="姓名" min-width="160" align="left"></el-table-column>
                         <el-table-column prop="sex" label="性别" min-width="160" align="center"></el-table-column>
                         <el-table-column prop="birth" label="出生年月" min-width="160" align="center"></el-table-column>
@@ -98,10 +98,7 @@
                     keyWords: this.query.keyWords
                 }
                 let newpa = http_builder_url('', params);
-                window.location.href = "/api/api-work/inspect/sDevice/exportData" + newpa + "&token=" + this.$store
-                    .state
-                    .token
-                    .token + '&exports='
+                window.location.href = "/api/inspect/resume/exportData" + newpa
             },
             clickQuery() {
                 // 搜索按钮

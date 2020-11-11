@@ -30,7 +30,7 @@
         display: block;
         font-size: 40px;
         color: #e9f0ff;
-        text-shadow: 0 8px 8px #b3b1ad, 0px 2px 1px #d5d5d5;
+        text-shadow:0 8px 8px #75757599, 0px 2px 1px #f2e8e8;
         font-weight: bold;
         letter-spacing: 4px;
         text-align: center;

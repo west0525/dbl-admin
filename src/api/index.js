@@ -3,12 +3,20 @@ import request from '../utils/request';
 //登录接口
 export const login = data => {
     return request({
-        url: '/login',
+        url: '/inspect/user/login',
         method: 'post',
         data
     });
 };
 
+//商务合作导出
+export const exportBusiness = data => {
+    return request({
+        url: '/inspect/business/exportData',
+        method: 'post',
+        data
+    });
+};
 //商务合作接口分页列表
 export const bussinessList = data => {
     return request({
@@ -26,6 +34,14 @@ export const savebusiness = data => {
     });
 };
 
+//简历导出
+export const exportResume = data => {
+    return request({
+        url: '/inspect/resume/exportData',
+        method: 'post',
+        data
+    });
+};
 //简历列表分页列表
 export const resumeList = data => {
     return request({
@@ -43,7 +59,14 @@ export const saveresume = data => {
     });
 };
 
-
+//用户导出
+export const exportUser = data => {
+    return request({
+        url: '/inspect/user/exportData',
+        method: 'post',
+        data
+    });
+};
 //用户管理分页列表
 export const userList = data => {
     return request({

@@ -52,23 +52,20 @@
                 this.$refs.login.validate(valid => {
                     if (valid) {
                         let params = {
-                            username: this.param.username,
-                            password: this.param.password
+                            name: this.param.username,
+                            loginPwd: this.param.password
                         }
-                        
-                        // login(params).then(res => {
-                        //     if (res.data.code == 1000) {
-                        //         this.$message.success('登录成功');
-                        //         localStorage.setItem('ms_username', this.param.username);
-                        //         this.$router.push('/home');
-                        //     }else{
-                        //         this.$message.error('登录失败');
-                        //     }
 
-                        // })
-                        this.$message.success('登录成功');
-                        localStorage.setItem('ms_username', this.param.username);
-                        this.$router.push('/home');
+                        login(params).then(res => {
+                            console.log(res);
+                            if (res.data.code == 1000) {
+                                this.$message.success('登录成功');
+                                sessionStorage.setItem('username', this.param.username);
+                                sessionStorage.setItem('sex', res.data.data.sex);
+                                this.$router.push('/home');
+                            }
+
+                        })
 
                     } else {
                         this.$message.error('请输入账号和密码');

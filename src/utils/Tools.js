@@ -197,7 +197,7 @@ export const http_builder_url = (url, data) => {
 }
 
 /**
- * 存储localStorage
+ * 存储sessionStorage
  * @param {any} data 
  */
 export const setStore = (name, content) => {
@@ -205,23 +205,23 @@ export const setStore = (name, content) => {
     if (typeof content !== 'string') {
         content = JSON.stringify(content);
     }
-    window.localStorage.setItem(name, content);
+    window.sessionStorage.setItem(name, content);
 }
 /**
- * 获取localStorage
+ * 获取sessionStorage
  * @param {any} data 
  */
 export const getStore = name => {
     if (!name) return;
-    return window.localStorage.getItem(name);
+    return window.sessionStorage.getItem(name);
 }
 /**
- *删除localStorage
+ *删除sessionStorage
  * @param {any} data 
  */
 export const removeStore = name => {
     if (!name) return;
-    window.localStorage.removeItem(name);
+    window.sessionStorage.removeItem(name);
 }
 
 /**
