@@ -42,7 +42,8 @@
 <script>
     import RightLayout from '@/components/common/dialogLayout';
     import {
-        saveuser
+        saveuser,
+        userinfo
     } from '../../api/index';
     export default {
         name: '',
@@ -163,15 +164,9 @@
             showLayout(data) {
                 console.log(data);
                 if (data) {
+                    this.form.id = data.id
                     this.title = "修改角色";
-                    this.oldForm = JSON.parse(JSON.stringify(data))
-                    this.form.id = data.id
-                    this.form.name = data.name
-                    this.form.sex = data.sex
-                    this.form.deptName = data.deptName
-                    this.form.phone = data.phone
-                    this.form.loginPwd = data.loginPwd
-                    this.form.id = data.id
+                    this.queryDetail()
                 } else {
                     this.title = "新增角色";
                     this.form.id = "";
@@ -205,15 +200,14 @@
                     }
                 })
             },
-            
+
             resetForm() { //重置
                 if (!this.form.id) {
                     this.$nextTick(() => {
                         this.$refs.form.resetFields();
                     })
                 } else {
-                    this.form = this.oldForm
-                    this.form.loginPwd2 = ''
+                    this.queryDetail()
                 }
             },
             closeLayout() {
@@ -222,6 +216,24 @@
                 setTimeout(() => {
                     this.resetForm();
                 }, 500)
+            },
+            queryDetail() { // 用户明细
+                let params = {
+                    id: this.form.id
+                }
+                userinfo(params).then(res => {
+                    if (res.code == 1000) {
+                        let data = res.data;
+                        if (data) {
+                            this.form.id = data.id
+                            this.form.name = data.name
+                            this.form.sex = data.sex
+                            this.form.deptName = data.deptName
+                            this.form.phone = data.phone
+                            this.form.loginPwd = data.loginPwd
+                        }
+                    }
+                })
             },
         }
     }

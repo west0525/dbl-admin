@@ -4,6 +4,7 @@ import router from './router';
 import ElementUI from 'element-ui';
 import VueI18n from 'vue-i18n';
 import { messages } from './components/common/i18n';
+import filters from "@/utils/filters";
 import 'element-ui/lib/theme-chalk/index.css'; // 默认主题
 // import './assets/css/theme-green/index.css'; // 浅绿色主题
 import './assets/css/custom.scss';
@@ -17,6 +18,7 @@ Vue.use(Vant);
 
 Vue.config.productionTip = false;
 Vue.use(VueI18n);
+Vue.use(filters);
 Vue.use(ElementUI, {
     size: 'small'
 });

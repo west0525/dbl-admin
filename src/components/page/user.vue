@@ -30,7 +30,11 @@
                         </el-table-column>
                         <el-table-column prop="deptName" label="所属部门" min-width="120" align="center">
                         </el-table-column>
-                        <el-table-column prop="crtDt" label="创建时间" min-width="160" align="center"></el-table-column>
+                        <el-table-column label="创建时间" min-width="160" align="center">
+                            <template slot-scope="scope">
+                                {{ scope.row.crtDt | formatDttm }}
+                            </template>
+                        </el-table-column>
                         <el-table-column label="操作" width="180" align="center" fixed="right">
                             <template slot-scope="scope">
                                 <el-button type="text" icon="el-icon-edit" @click="editUser(scope.row)">
@@ -51,7 +55,7 @@
                 </div>
             </div>
         </div>
-        <addUser ref="add"></addUser>
+        <addUser ref="add" @refresh="clickQuery"></addUser>
     </div>
 </template>
 
@@ -87,6 +91,9 @@
         },
         components: {
             addUser
+        },
+        created() {
+            this.clickQuery()
         },
         methods: {
             newUser() {
@@ -144,8 +151,10 @@
                 this.loading = true
                 userList(params)
                     .then(res => {
-                        if (res.data.code == 1000) {
-                            let data = res.data.data
+                        console.log(res, '123')
+                        if (res.code == 1000) {
+
+                            let data = res.data
                             if (Array.isArray(data.data)) {
                                 this.tableData.columnData = [...data.data]
                                 this.tableData.total = data.total
