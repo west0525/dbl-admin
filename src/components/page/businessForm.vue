@@ -45,6 +45,9 @@
 
 <script>
     import {
+        savebusiness
+    } from '../../api/index';
+    import {
         Dialog
     } from 'vant';
     export default {
@@ -71,12 +74,38 @@
             validatorPhone(val) {
                 return /^1[3-9]\d{9}$/.test(val);
             },
+            resetForm() {
+                this.form = {
+                    id: '',
+                    compName: '',
+                    compDescr: '',
+                    workName: '',
+                    workPhone: '',
+                    job: '',
+                    workDuty: '',
+                    workRequest: '',
+                    salary: '',
+                    contactPhone: '',
+                    workAddress: '',
+                }
+            },
             onSubmit(values) {
                 Dialog.confirm({
                     title: '提示',
                     message: '是否提交招聘登记，请认真填写信息，保证所填信息真实有效，电话号码正确。后续会有专业人士与您洽谈合作，请保持手机号畅通',
                 }).then(() => {
-                    console.log('submit', values);
+                    let params = values
+                    params.id = ''
+                    savebusiness(params).then(res => {
+                        if (res.data.code == 1000) {
+                            Dialog.alert({
+                                message: '信息提交成功',
+                            }).then(() => {
+                                this.resetForm()
+                            });
+
+                        }
+                    })
                 });
 
             },

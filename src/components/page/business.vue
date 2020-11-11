@@ -11,7 +11,8 @@
             <div class="page-column">
                 <div class="search-box">
                     <div>
-                        <el-input v-model="query.keyWords" clearable placeholder="可输入公司名称，经办人姓名，工作地址查询" class="handle-input mr10"></el-input>
+                        <el-input v-model="query.keyWords" clearable placeholder="可输入公司名称，经办人姓名，工作地址查询"
+                            class="handle-input mr10"></el-input>
                         <el-button type="primary" icon="el-icon-search" @click="clickQuery">搜索</el-button>
                     </div>
                     <div>
@@ -31,9 +32,14 @@
                         <el-table-column prop="workDuty" label="岗位职责" min-width="160" align="left"></el-table-column>
                         <el-table-column prop="workRequest" label="任职要求" min-width="160" align="left"></el-table-column>
                         <el-table-column prop="salary" label="薪资福利" min-width="120" align="center"></el-table-column>
-                        <el-table-column prop="contactPhone" label="联系方式" min-width="120" align="center"></el-table-column>
+                        <el-table-column prop="contactPhone" label="联系方式" min-width="120" align="center">
+                        </el-table-column>
                         <el-table-column prop="workAddress" label="工作地址" min-width="160" align="left"></el-table-column>
-                        <el-table-column prop="crtDt" label="创建时间" min-width="160" align="center"></el-table-column>
+                        <el-table-column prop="crtDt" label="创建时间" min-width="160" align="center">
+                            <template slot-scope="scope">
+                                {{ scope.row.crtDt | formatDttm }}
+                            </template>
+                        </el-table-column>
                     </el-table>
                 </div>
 
@@ -71,9 +77,12 @@
                     currentPage: 1,
                     total: 0,
                     headerData: [],
-                    columnData: [{}, {}, {}, {}, ]
+                    columnData: []
                 },
             };
+        },
+        created() {
+            this.clickQuery()
         },
         methods: {
             exportFun() {

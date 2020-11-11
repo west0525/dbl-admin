@@ -41,7 +41,11 @@
                         </el-table-column>
                         <el-table-column prop="address" label="居住地址" min-width="160" align="left">
                         </el-table-column>
-                        <el-table-column prop="crtDt" label="创建时间" min-width="160" align="center"></el-table-column>
+                        <el-table-column prop="crtDt" label="创建时间" min-width="160" align="center">
+                            <template slot-scope="scope">
+                                {{ scope.row.crtDt | formatDttm }}
+                            </template>
+                        </el-table-column>
                     </el-table>
                 </div>
 
@@ -82,6 +86,9 @@
                     columnData: []
                 },
             };
+        },
+        created() {
+            this.clickQuery()
         },
         methods: {
             exportFun() {

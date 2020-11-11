@@ -74,13 +74,11 @@
             return {
                 query: {
                     keywords: '',
-                    pageIndex: 1,
-                    pageSize: 10
                 },
                 tableData: {
                     // 表格绑定对象
-                    orders: "",
-                    columns: "",
+                    orders: "DESC",
+                    columns: "crtDt",
                     pageSize: 15,
                     currentPage: 1,
                     total: 0,
@@ -132,7 +130,7 @@
                         }
                         deleteuser(params).then(res => {
                             if (res.data.code == 1000) {
-                                this.$messagebox.success('删除成功!')
+                                this.$message.success('删除成功!')
                                 this.clickQuery()
                             }
                         })
@@ -151,9 +149,8 @@
                 this.loading = true
                 userList(params)
                     .then(res => {
-                        if (res.code == 1000) {
-
-                            let data = res.data
+                        if (res.data.code == 1000) {
+                            let data = res.data.data
                             if (Array.isArray(data.data)) {
                                 this.tableData.columnData = [...data.data]
                                 this.tableData.total = data.total

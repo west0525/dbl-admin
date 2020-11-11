@@ -76,18 +76,15 @@
       <van-field required name="job" label="应聘岗位名称(必选一个，最多选择三个)" class="scheck"
         :rules="[{ required: true, message: '请选择应聘岗位' }]">
         <template #input>
-          <van-checkbox-group v-model="form.job" :max="3">
+          <van-checkbox-group v-model="form.job" :max="3" style="width:100%">
             <van-checkbox name="顺丰快递员" shape="square">顺丰快递员</van-checkbox>
             <van-checkbox name="顺丰货运司机" shape="square">顺丰货运司机</van-checkbox>
             <van-checkbox name="国航行李运作员" shape="square">国航行李运作员</van-checkbox>
             <van-checkbox name="医院/幼儿园 保洁员" shape="square">医院/幼儿园 保洁员</van-checkbox>
             <van-checkbox name="机关单位/幼儿园 厨师" shape="square">机关单位/幼儿园 厨师</van-checkbox>
             <van-checkbox name="国航客舱运作员" shape="square">国航客舱运作员</van-checkbox>
-            <van-checkbox name="其他" shape="square">
-              <template>
-                其他<input type="text" name="other" style="margin-left:10px" v-model="form.other">
-              </template>
-            </van-checkbox>
+            <van-checkbox name="其他" shape="square">其他</van-checkbox>
+            <input v-if="showother" type="text" name="other" v-model="form.other" style="width:100%">
           </van-checkbox-group>
         </template>
       </van-field>
@@ -98,14 +95,17 @@
       </div>
     </van-form>
     <van-popup v-model="show" position="bottom">
-      <van-datetime-picker v-model="datePicker" :max-date="maxDate" :formatter="formatter" type="date"
-        @confirm="confirmDate" title="选择年月日" />
+      <van-datetime-picker v-model="datePicker" :max-date="maxDate" :min-date="minDate" :formatter="formatter"
+        type="date" @confirm="confirmDate" title="选择年月日" />
     </van-popup>
 
   </div>
 </template>
 
 <script>
+  import {
+    saveresume
+  } from '../../api/index';
   import {
     Dialog
   } from 'vant';
@@ -115,16 +115,42 @@
   export default {
     data() {
       return {
+        showother: false,
         maxDate: new Date(),
+        minDate: new Date(1900, 0, 1),
         datePicker: new Date(),
         show: false,
         isOther: true,
         logo: require('../../assets/img/loginbg.png'),
         form: {
-          sex: '男'
+          id: '',
+          sex: '男',
+          birth: '',
+          idNumber: '',
+          education: '',
+          school: '',
+          major: '',
+          isYear: '',
+          placeType: '',
+          address: '',
+          phone: '',
+          experience: '',
+          skill: '',
+          job: [],
+          other: '',
         },
 
       };
+    },
+    watch: {
+      'form.job'(val) {
+        if (val.indexOf('其他') > -1) {
+          this.showother = true
+        } else {
+          this.showother = false
+          this.form.other = ''
+        }
+      }
     },
     methods: {
       confirmDate(val) {
@@ -158,8 +184,28 @@
       validatorId(val) {
         return /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/.test(val);
       },
+      resetForm() {
+        this.form = {
+          id: '',
+          sex: '男',
+          birth: '',
+          idNumber: '',
+          education: '',
+          school: '',
+          major: '',
+          isYear: '',
+          placeType: '',
+          address: '',
+          phone: '',
+          experience: '',
+          skill: '',
+          job: [],
+          other: '',
+        }
+      },
       onSubmit(values) {
-        if (this.form.job.indexOf('其他') > -1 && this.form.other == '') {
+        console.log(this.form.other);
+        if (this.showother && this.form.other == '') {
           Toast('请输入其他职业')
           return
         }
@@ -167,7 +213,33 @@
           title: '提示',
           message: '是否提交求职登记，请认真填写信息，保证所填信息真实有效，电话号码正确',
         }).then(() => {
-          console.log('submit', values);
+          let params = {
+            id: '',
+            sex: this.form.sex,
+            birth: this.form.birth,
+            idNumber: this.form.idNumber,
+            education: this.form.education,
+            school: this.form.school,
+            major: this.form.major,
+            isYear: this.form.isYear,
+            placeType: this.form.placeType,
+            address: this.form.address,
+            phone: this.form.phone,
+            experience: this.form.experience,
+            skill: this.form.skill,
+            job: this.form.job.join(),
+            other: this.form.other,
+          }
+          saveresume(params).then(res => {
+            if (res.data.code == 1000) {
+              Dialog.alert({
+                message: '信息提交成功',
+              }).then(() => {
+                this.resetForm()
+              });
+
+            }
+          })
         });
       },
     },

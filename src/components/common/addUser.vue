@@ -81,7 +81,7 @@
                 form: {
                     id: '',
                     name: '',
-                    sex: 1,
+                    sex: '男',
                     deptName: '',
                     phone: '',
                     loginPwd: '',
@@ -221,8 +221,8 @@
                     id: this.form.id
                 }
                 userinfo(params).then(res => {
-                    if (res.code == 1000) {
-                        let data = res.data;
+                    if (res.data.code == 1000) {
+                        let data = res.data.data;
                         if (data) {
                             this.form.id = data.id
                             this.form.name = data.name
