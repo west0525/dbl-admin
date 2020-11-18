@@ -10,7 +10,7 @@ module.exports = {
         hotOnly: true, // 热更新
         proxy: {
             '^/api': {
-                target: 'http://8.131.68.122:27070', // 重写路径
+                target: 'http://152.136.98.38:27070', // 重写路径
                 ws: false, //开启WebSocket
                 secure: false, // 如果是https接口，需要配置这个参数
                 changeOrigin: true,

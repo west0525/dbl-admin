@@ -11,16 +11,24 @@
             <div class="page-column">
                 <div class="search-box">
                     <div>
-                        <el-input v-model="query.keyWords" placeholder="输入姓名、岗位、技能、工作技能查询" class="handle-input mr10"></el-input>
+
+                        <el-input v-model="query.keyWords" placeholder="输入姓名、岗位、技能、工作技能查询" class="handle-input mr10">
+                        </el-input>
                         <el-button type="primary" icon="el-icon-search" @click="clickQuery">搜索</el-button>
                     </div>
                     <div>
-                        <el-button type="primary" icon="el-icon-download" @click="exportFun" :disabled="!tableData.columnData.length">导出
+                        <el-button  type="danger" icon="el-icon-delete" @click="mulDeleteFun"
+                            :disabled="selection.length == 0">批量删除
+                        </el-button>
+                        <el-button type="primary" icon="el-icon-download" @click="exportFun"
+                            :disabled="!tableData.columnData.length">导出
                         </el-button>
                     </div>
                 </div>
                 <div class="table-box">
-                    <el-table :data="tableData.columnData" border height="100%">
+                    <el-table :data="tableData.columnData" border height="100%"
+                        @selection-change="handleSelectionChange">
+                        <el-table-column type="selection"></el-table-column>
                         <el-table-column type="index" width="50" label="序号"> </el-table-column>
                         <el-table-column prop="job" label="求职岗位" min-width="300" align="center"></el-table-column>
                         <el-table-column prop="name" label="姓名" min-width="160" align="left"></el-table-column>
@@ -46,6 +54,13 @@
                                 {{ scope.row.crtDt | formatDttm }}
                             </template>
                         </el-table-column>
+                        <el-table-column label="操作" width="100" align="center" fixed="right">
+                            <template slot-scope="scope">
+                                <el-button type="text" icon="el-icon-delete" @click="deleteFun(scope.row.id)"
+                                    class="red">
+                                    删除</el-button>
+                            </template>
+                        </el-table-column>
                     </el-table>
                 </div>
 
@@ -63,7 +78,8 @@
 
 <script>
     import {
-        resumeList
+        resumeList,
+        deleteresume
     } from '../../api/index';
     import {
         http_builder_url
@@ -75,6 +91,7 @@
                 query: {
                     keyWords: '',
                 },
+                selection: [],
                 tableData: {
                     // 表格绑定对象
                     orders: "",
@@ -133,6 +150,33 @@
                         this.tableData.columnData = []
                         this.loading = false
                     })
+            },
+            handleSelectionChange(selection) { // 表格复选框勾选触发
+                this.selection = selection;
+            },
+            mulDeleteFun() { // 多选删除
+                let ids = this.selection.map(item => item.id).join(',');
+                this.deleteFun(ids);
+            },
+            deleteFun(ids) {
+                this.$confirm('确认删除选中的简历记录？删除后将不能恢复！', {
+                    title: '提示',
+                    type: 'warning'
+                }).then(() => {
+                    let params = {
+                        ids,
+                    }
+                    deleteresume(params).then(res => {
+                        if (res.data.code == 1000) {
+                            this.$notify({
+                                title: '提示',
+                                type: 'success',
+                                message: '删除成功！'
+                            })
+                            this.clickQuery();
+                        }
+                    })
+                })
             },
             handleCurrentChange(val) {
                 // 分页方法 （点击第val页触发）

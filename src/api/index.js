@@ -33,6 +33,14 @@ export const savebusiness = data => {
         data
     });
 };
+//商务合作删除
+export const deletebusiness = data => {
+    return request({
+        url: '/inspect/business/deleteByIds',
+        method: 'post',
+        data
+    });
+};
 
 //简历导出
 export const exportResume = data => {
@@ -46,6 +54,14 @@ export const exportResume = data => {
 export const resumeList = data => {
     return request({
         url: '/inspect/resume/pageQuery',
+        method: 'post',
+        data
+    });
+};
+//简历列表删除
+export const deleteresume = data => {
+    return request({
+        url: '/inspect/resume/deleteByIds',
         method: 'post',
         data
     });
